@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "svelte.svelte-vscode",
+    "ardenivanov.svelte-intellisense",
+    "aaron-bond.better-comments",
+    "csstools.postcss",
+    "biomejs.biome",
+    "ms-playwright.playwright",
+    "vitest.explorer",
+    "antfu.file-nesting"
+  ]
+}

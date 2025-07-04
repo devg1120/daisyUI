@@ -1,0 +1,139 @@
+{
+	"name": "@smallstack/svelte-ui",
+	"version": "0.5.4",
+	"description": "Tiny library for Svelte 5 and DaisyUI, published as multi entry ESM module and as web components.",
+	"author": {
+		"name": "smallstack GmbH",
+		"email": "contact@smallstack.com"
+	},
+	"bugs": {
+		"url": "https://github.com/smallstack/svelte-ui/issues"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"homepage": "https://svelte-ui.com",
+	"keywords": [
+		"svelte",
+		"daisyui",
+		"webcomponents",
+		"library",
+		"ui",
+		"tailwindcss"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/smallstack/svelte-ui.git"
+	},
+	"scripts": {
+		"dev": "vite dev --host --port 3000",
+		"build": "vite build && npm run package",
+		"build:wc": "npm run build && npm run build:wc:chat && npm run build:wc:forms && npm run build:wc:layout && npm run build:wc:modals && npm run build:wc:utils",
+		"build:wc:chat": "vite -c .wc-configs/vite.chat.wc.config build",
+		"build:wc:forms": "vite -c .wc-configs/vite.forms.wc.config build",
+		"build:wc:layout": "vite -c .wc-configs/vite.layout.wc.config build",
+		"build:wc:modals": "vite -c .wc-configs/vite.modals.wc.config build",
+		"build:wc:navigation": "vite -c .wc-configs/vite.navigation.wc.config build",
+		"build:wc:utils": "vite -c .wc-configs/vite.utils.wc.config build",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
+		"test": "npm run test:integration && npm run test:unit",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write .",
+		"test:integration": "playwright test",
+		"test:unit": "vitest --coverage",
+		"version": "npm run build:wc && git add static/cdn/**",
+		"release:patch": "npm version patch && git push && git push --tags",
+		"release:minor": "npm version minor && git push && git push --tags",
+		"clean": "npm unlink -g && npm uninstall -g && rm -Rf dist .svelte-kit .vercel",
+		"link": "npm link",
+		"build:clean": "npm run clean && npm run build && npm run link",
+		"test:browser": "vitest --workspace=vitest.workspace.ts"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		},
+		"./forms": {
+			"types": "./dist/modules/forms/index.d.ts",
+			"svelte": "./dist/modules/forms/index.js"
+		},
+		"./layout": {
+			"types": "./dist/modules/layout/index.d.ts",
+			"svelte": "./dist/modules/layout/index.js"
+		},
+		"./modals": {
+			"types": "./dist/modules/modals/index.d.ts",
+			"svelte": "./dist/modules/modals/index.js"
+		},
+		"./navigation": {
+			"types": "./dist/modules/navigation/index.d.ts",
+			"svelte": "./dist/modules/navigation/index.js"
+		},
+		"./utils": {
+			"types": "./dist/modules/utils/index.d.ts",
+			"svelte": "./dist/modules/utils/index.js"
+		},
+		"./styles": "./dist/modules/styles/index.js"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"devDependencies": {
+		"@codecov/sveltekit-plugin": "^1.7.0",
+		"@fetch-mock/vitest": "^0.2.6",
+		"@playwright/test": "^1.49.1",
+		"@sveltejs/adapter-vercel": "^5.5.2",
+		"@sveltejs/package": "^2.3.7",
+		"@sveltejs/vite-plugin-svelte": "^5.0.3",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/svelte": "^5.2.6",
+		"@types/eslint": "^9.6.0",
+		"@types/node": "^22.9.1",
+		"daisyui": "^5.0.0-beta.5",
+		"@vitest/browser": "3.0.7",
+		"@vitest/coverage-v8": "3.0.7",
+		"autoprefixer": "^10.4.19",
+		"eslint": "^9.17.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^2.46.1",
+		"globals": "^15.15.0",
+		"playwright": "^1.49.1",
+		"prettier": "^3.5.1",
+		"prettier-plugin-svelte": "^3.3.2",
+		"publint": "^0.3.5",
+		"svelte-check": "^4.1.1",
+		"tailwindcss": "^4.0.1",
+		"tslib": "^2.4.1",
+		"typescript": "^5.7.2",
+		"typescript-eslint": "^8.19.1",
+		"vite": "^6.2.3",
+		"vitest": "3.0.7"
+	},
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"dependencies": {
+		"@floating-ui/dom": "^1.6.12",
+		"@smallstack/utils": "^3.0.10",
+		"@sveltejs/kit": "^2.17.2",
+		"@tailwindcss/vite": "^4.1.3",
+		"date-fns": "^4.1.0",
+		"i18next": "^24.2.0",
+		"i18next-browser-languagedetector": "^8.0.3",
+		"jsdom": "^26.0.0",
+		"perfect-freehand": "^1.2.2",
+		"pulltorefreshjs": "^0.1.22",
+		"svelte": "^5.20.1",
+		"svelte-i18next": "^2.2.2"
+	},
+	"volta": {
+		"node": "20.16.0"
+	}
+}
